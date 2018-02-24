@@ -8,11 +8,11 @@ class monty_hall:
     '''
     Boxes have the attributes car or goat. Can change number of boxes, switches, number of tests, and cars.
     '''
-    def __init__(self, nbox=3,ncar=1,nswitch=1,iter=100):
+    def __init__(self, nbox=3,ncar=1,nswitch=1,iter_=100):
         self.nbox=nbox
         self.ncar=ncar
         self.nswitch=nswitch
-        self.iter=iter
+        self.iter=iter_
     def setup(self):
         curtains=[]
         for i in range(self.ncar):
