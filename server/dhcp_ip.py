@@ -3,19 +3,16 @@
 import sys  
 import wmi
 
-from twisted.internet import reactor, protocol
+from twisted.internet import reactor
+from twisted.web.resource import Resource
 
-
-class Echo(protocol.Protocol):
-    """This is just about the simplest possible protocol"""
-    
-    def dataReceived(self, data):
-        "As soon as any data is received, write it back."
-        self.transport.write(data)
-        
-
-
-    
+from twisted.web.server import Site
+import time
+class BusyPage(Resource):
+    isLeaf = True
+    def render_GET(self, request):
+        time.sleep(5)
+        return "Finally done, at %s" % (time.asctime(),)
 
 
 
@@ -35,9 +32,7 @@ if __name__ == "__main__":
     print(val)  
 
     print('ip: ', ', '.join(objNicConfig.IPAddress))
-    factory = protocol.ServerFactory()
-    factory.protocol = Echo
-    reactor.listenTCP(8000,factory)
-    #print("Test!")
-    
+    factory = Site(BusyPage())
+    reactor.listenTCP(8000, factory)
     reactor.run()
+
