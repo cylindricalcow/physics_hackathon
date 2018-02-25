@@ -8,6 +8,7 @@ class Character:
         self.raceclass = raceclass
         if new_player:
         #in stats/stat_mods, index 0-5 correspond to STR, DEX, CON,INT, WIS, and CHA respectively            
+            self.position = [0.0, 0.0] #x and y coordinates; pull from database
             self.art=databaseart#this is gonna come from the database eventually            
             self.stats = self.statline()  # Needs to be user defined. Use Kivy
             self.stat_mods = self.modifiers(self.stats)
@@ -28,7 +29,20 @@ class Character:
             self.magic_user=False #depeding on class info from database
             if self.magic_user:
                 make_spell_slots
-                
+
+    def get_str(self):
+        return stats[0]
+    def get_dex(self):
+        return stats[1]
+    def get_con(self):
+        return stats[2]
+    def get_int(self):
+        return stats[3]
+    def get_wis(self):
+        return stats[4]
+    def get_cha(self):
+        return stats[5]
+
     def make_spell_slots(self):   
         self.max_cast_level=seeclass #add from database depending on level
         self.cantrips=seeclass#again, add from database depending on class/level
