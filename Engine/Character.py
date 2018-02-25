@@ -29,7 +29,34 @@ class Character:
             self.magic_user=False #depeding on class info from database
             if self.magic_user:
                 make_spell_slots
-
+            #Conditions      
+            self.paralyzed=False 
+            self.poisoned=False
+            self.healthremoval=False
+            self.grappled=False
+            self.prone=False
+            self.petrified=False
+            self.restrained=False
+            self.advantageagainst=False
+            self.moveslow=False   
+          ######################END INIT  
+    def getspeed(self):
+        if(self.grappled==True):
+            return 0
+        if(self.petrified==True):
+            return 0
+        if(self.restrained==True):
+            return 0
+        if(self.moveslow==True):
+            return self.speed/2
+        if(self.prone==True):
+            return self.speed/2
+        
+    def restrained(self):
+        self.restrained==True
+        
+        
+        
     def get_str(self):
         return stats[0]
     def get_dex(self):
