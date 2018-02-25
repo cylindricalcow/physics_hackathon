@@ -8,6 +8,7 @@ class Character:
         self.raceclass = raceclass
         if new_player:
         #in stats/stat_mods, index 0-5 correspond to STR, DEX, CON,INT, WIS, and CHA respectively
+            self.art=databaseart#this is gonna come from the database eventually            
             self.stats = self.statline()  # Needs to be user defined. Use Kivy
             self.stat_mods = self.modifiers(self.stats)
             self.ac=10+self.stat_mods[1]#+ac of equipped armor
@@ -25,43 +26,46 @@ class Character:
             if self.magic_user:
                 make_spell_slots
                 
-             def make_spell_slots(self)   
-                self.max_cast_level=seeclass #add from database depending on level
-                self.cantrips=seeclass#again, add from database depending on class/level
-                self.spell_slots=np.zeros(self.max_cast_level)
-                for i in range(1,self.max_cast_level+1):
-                    spell_slots[i]=seeclassagain #add from database depending on level
+    def make_spell_slots(self):   
+        self.max_cast_level=seeclass #add from database depending on level
+        self.cantrips=seeclass#again, add from database depending on class/level
+        self.spell_slots=np.zeros(self.max_cast_level)
+        for i in range(1,self.max_cast_level+1):
+            spell_slots[i]=seeclassagain #add from database depending on level
                 
     self.prepped_spells=spellist #user-defined, ensuring that they don't exceed slots (if it's a class that works that way) happens while choosing 
     self.current_spells=self.spell_slots #a list for counting how many spells remain. A short/long rest function will, among other things, set this equal to spell_slots again       
     
-    def self.use_spell_slot(self,spell_level):
+    def use_spell_slot(self,spell_level):
         self.current_spells[spell_level-1]-=1
         
-    def self.apply_damage(self,damage):#accepts an integer to subtract from hp
+    def apply_damage(self,damage):#accepts an integer to subtract from hp
         self.hp-=damage
         
-    def self.canequip(self,equippable):#takes number of hands needed for each item from database
-        if equippable#is shield or weapon:        
-            if hands_in_use==2:
-                return False
-            elif hands_in_use<2:
-                return True
-        elif equippable#is armor:
-            if #armor in equipped items:
+    def canequip(self,equippable):#takes number of hands needed for each item from database
+        
+        if type(equippable) != Equippable:
+            return False
+        elif (type(equippable)==Weapon) or (type(equippable)==Shield):
+            if self.hands_free<equippable.hands_used:
                 return False
             else:
                 return True
+        elif type(equippable)==Armor:
+            for i in range(len(self.equipped_items)):
+                if type(self.equipped_items[i])==Armor:
+                    return False
                 
-    def self.equip_item(self,equippable):
+    def equip_item(self,equippable):
         if self.canequip(equippable):
             self.equipped_items.append(equippable)
             equippable.equip()
         else:
            # UIdisplay("Can't equip!")
             #absolutely no idea how to do this
+            pass
         
-    def self.unequip_item(self,equippable):
+    def unequip_item(self,equippable):
         self.equipped_items.remove(equippable)
         equippable.unequip()
         
@@ -136,14 +140,14 @@ class Character:
         if (lvl >= 17):
             return 6
             
-    def ability_score_improvement(self, userinput) # takes some form of user input to pull total allowed points addable from database and distribute them among stat scores
+    def ability_score_improvement(self, userinput): # takes some form of user input to pull total allowed points addable from database and distribute them among stat scores
         self.stats+=userinput
         
-    def self.add_xp(self,newxp):
+    def add_xp(self,newxp):
         self.XP+=newxp
         self.level_up()
         
-    def self.level_up(self):
+    def level_up(self):
         oldlevel=self.level
         self.level = self.lvl(self.XP)
         if self.level != oldlevel: #if level is updated, do all the level up things
