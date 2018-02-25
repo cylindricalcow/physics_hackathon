@@ -57,7 +57,7 @@ def Initiative_Order(rolls): #Takes in dict, returns initiative order
 
 
 def save_throw(stat, adv=False, disadv=False, proficiency=False): #Takes in stat, additional parameters for adv/disadv effects, and for proficiency
-	if prof:
+	if proficiency:
 		return d20(adv, disadv)+stat+proficiency
 	else:
 		return d20(adv, disadv)+stat
