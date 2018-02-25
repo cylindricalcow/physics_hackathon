@@ -1,0 +1,8 @@
+Condition ,#
+Paralyzed,1
+Poisoned ,2
+Health Removal,3
+Grappled,4
+Prone,5
+Petrified,6
+Restrained,7
