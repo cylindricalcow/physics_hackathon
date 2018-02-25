@@ -1,28 +1,28 @@
-NAME,TYPE,HP,AC,PROF,STR,DEX,CON,INT,WIS,CHA,STR PROF,DEX PROF,CON PROF,INT PROF,WIS PROF,CHA PROF,SPD,Size,Action 1,Action 2,Action 3,Action 4,Passive 1,Passsive 2,Passive 3
-Skeleton,Undead,13,13,2,10,14,15,6,8,5,0,0,0,0,0,0,30,0,Attack (1),Attack (2),,,,,
-Zombie,Undead,22,8,2,13,6,16,3,6,5,0,0,0,0,1,0,20,0,Attack (3),,,,Undead Fortitude,,
-Ghoul,Undead,22,12,2,13,15,10,7,10,10,0,0,0,0,0,0,30,0,Attack (4),Attack (5),,,,,
-Shadow,Undead,16,12,2,6,14,13,6,10,8,0,0,0,0,0,0,40,0,Attack (6),,,,Amorphous,Shadow Stealth,Sunlight Sensitivity
-Wight,Undead,45,14,2,15,14,16,10,13,15,0,0,0,0,0,0,30,0,Attack (82),Attack (7),Attack (8),Attack (9),Sunlight Sensitivity,,
-Vampire,Undead,82,15,3,16,16,16,11,10,12,0,1,0,0,1,0,30,0,Attack (83),Attack (10),Attack (11),,Regeneration,Spider Climb,Vampire Weakness
-Wolf,Beast / plant,11,13,2,12,15,12,3,12,6,0,0,0,0,0,0,40,0,Attack (12),,,,Keen Hearing and Smell,Pack Tactics,
-Brown Bear,Beast / plant,34,11,1,19,10,16,2,13,7,0,0,0,0,0,0,40,1,Attack (84),Attack (13),Attack (14),,Keen Smell,,
-Giant Spider,Beast / plant,26,14,2,14,16,12,2,11,4,0,0,0,0,0,0,30,1,Attack (15),,,,Spider Climb,Web Sense,Web Walk
-Swarm of Bats,Beast / plant,22,12,2,5,15,10,2,12,4,0,0,0,0,0,0,30,0,Attack (16),,,,Echolocation,Keen Hearing,Swarm
- Blight,Beast / plant,11,12,2,12,12,13,4,8,3,0,0,0,0,0,0,30,0,Attack (17) ,Attack (18),,,,,
-Giant crocodile,Beast / plant,85,14,3,12,9,17,2,10,7,0,0,0,0,0,0,30,2,Attack (85),Attack (19),Attack (20),,Hold Breath,,
-Shambling mound,Beast / plant,136,15,3,18,8,16,5,10,5,0,0,0,0,0,0,20,1,Attack (86),Attack (21),Engulf (Shambling Mound),,Lightning Absorption,,
-Cockatrice,Monstrosity,27,11,2,9,12,12,2,13,5,0,0,0,0,0,0,40,0,Attack (22),,,,,,
-Harpy,Monstrosity,38,11,2,12,13,12,7,10,13,0,0,0,0,0,0,40,0,Attack (87),Attack (23),Attack (24),Luring Song (Harpy),,,
-Minotaur,Monstrosity,76,14,2,18,11,16,6,16,9,0,0,0,0,0,0,40,1,Attack (25),Attack (26),,,Charge (Minotaur),Labyrinthine Recall,Reckless
-Centaur,Monstrosity,45,12,2,18,14,14,9,13,11,0,0,0,0,0,0,50,1,Attack (88),Attack (27),Attack (9),Attack (28),Charge (Centaur),,
-Mimic,Monstrosity,58,12,2,17,12,15,5,13,8,0,0,0,0,0,0,15,0,Attack (29),Attack (30),,,Shapchanger,Adhesive,Gappler
-Basilisk,Monstrosity,52,15,2,16,8,15,2,8,7,0,0,0,0,0,0,20,0,Attack (31),,,,Petrifying Gaze (Basilisk),,
-Medusa,Monstrosity,127,15,3,10,15,16,12,13,15,0,0,0,0,0,0,30,0,Attack (89),Attack (32),Attack (2),Attack (8),Petrifying Gaze (Medusa),,
-Orc,Humanoid,15,13,2,16,12,16,7,11,10,0,0,0,0,0,0,30,0,Attack (35),Attack (33),,,Aggressive,,
-Goblin,Humanoid,7,15,2,8,14,10,10,8,8,0,0,0,0,0,0,30,0,Attack (34),Attack (1),,,Nimble Escape,,
-Goblin boss,Humanoid,21,17,2,10,14,10,10,8,10,0,0,0,0,0,0,30,0,Attack (90),Attact (34),Attack (33),,Nimble Escape,,
-Sahuagin,Humanoid,22,12,2,13,11,12,12,13,9,0,0,0,0,0,0,30,0,Attack (91),Attack (36),Attack (37),Attack (38),Blood Frenzy,Limited Amphibiousness,Shark Telepathy
-Orc Chief,Humanoid,93,16,2,18,12,18,11,11,16,1,0,1,0,1,0,30,0,Attack (93),Attack (25),Attack (39),,Aggressive,Orc Fury,
-Sahuagin Baron,Humanoid,76,16,3,19,15,16,14,13,17,0,1,1,1,1,0,30,1,Attack (92),Attack (40),Attack (41),Attack (42),Blood Frenzy,Limited Amphibiousness,Shark Telepathy
- ,,,,,,,,,,,,,,,,,,,,,,,,,
+NAME,TYPE,HP,AC,PROF,STR,DEX,CON,INT,WIS,CHA,STR PROF,DEX PROF,CON PROF,INT PROF,WIS PROF,CHA PROF,SPD,Size,Action 1,Action 2,Action 3,Action 4,Passive 1,Passsive 2,Passive 3,CR,XP
+Skeleton,Undead,13,13,2,10,14,15,6,8,5,0,0,0,0,0,0,30,0,Attack (1),Attack (2),,,,,,0.25,50
+Zombie,Undead,22,8,2,13,6,16,3,6,5,0,0,0,0,1,0,20,0,Attack (3),,,,Undead Fortitude,,,0.25,50
+Ghoul,Undead,22,12,2,13,15,10,7,10,10,0,0,0,0,0,0,30,0,Attack (4),Attack (5),,,,,,1,200
+Shadow,Undead,16,12,2,6,14,13,6,10,8,0,0,0,0,0,0,40,0,Attack (6),,,,Amorphous,Shadow Stealth,Sunlight Sensitivity,0.5,100
+Wight,Undead,45,14,2,15,14,16,10,13,15,0,0,0,0,0,0,30,0,Attack (82),Attack (7),Attack (8),Attack (9),Sunlight Sensitivity,,,3,700
+Vampire,Undead,82,15,3,16,16,16,11,10,12,0,1,0,0,1,0,30,0,Attack (83),Attack (10),Attack (11),,Regeneration,Spider Climb,Vampire Weakness,5,1800
+Wolf,Beast / plant,11,13,2,12,15,12,3,12,6,0,0,0,0,0,0,40,0,Attack (12),,,,Keen Hearing and Smell,Pack Tactics,,0.25,50
+Brown Bear,Beast / plant,34,11,1,19,10,16,2,13,7,0,0,0,0,0,0,40,1,Attack (84),Attack (13),Attack (14),,Keen Smell,,,1,200
+Giant Spider,Beast / plant,26,14,2,14,16,12,2,11,4,0,0,0,0,0,0,30,1,Attack (15),,,,Spider Climb,Web Sense,Web Walk,1,200
+Swarm of Bats,Beast / plant,22,12,2,5,15,10,2,12,4,0,0,0,0,0,0,30,0,Attack (16),,,,Echolocation,Keen Hearing,Swarm,0.25,50
+ Blight,Beast / plant,11,12,2,12,12,13,4,8,3,0,0,0,0,0,0,30,0,Attack (17) ,Attack (18),,,,,,0.5,50
+Giant crocodile,Beast / plant,85,14,3,12,9,17,2,10,7,0,0,0,0,0,0,30,2,Attack (85),Attack (19),Attack (20),,Hold Breath,,,5,1800
+Shambling mound,Beast / plant,136,15,3,18,8,16,5,10,5,0,0,0,0,0,0,20,1,Attack (86),Attack (21),Engulf (Shambling Mound),,Lightning Absorption,,,5,1800
+Cockatrice,Monstrosity,27,11,2,9,12,12,2,13,5,0,0,0,0,0,0,40,0,Attack (22),,,,,,,0.5,100
+Harpy,Monstrosity,38,11,2,12,13,12,7,10,13,0,0,0,0,0,0,40,0,Attack (87),Attack (23),Attack (24),Luring Song (Harpy),,,,1,200
+Minotaur,Monstrosity,76,14,2,18,11,16,6,16,9,0,0,0,0,0,0,40,1,Attack (25),Attack (26),,,Charge (Minotaur),Labyrinthine Recall,Reckless,3,700
+Centaur,Monstrosity,45,12,2,18,14,14,9,13,11,0,0,0,0,0,0,50,1,Attack (88),Attack (27),Attack (9),Attack (28),Charge (Centaur),,,2,450
+Mimic,Monstrosity,58,12,2,17,12,15,5,13,8,0,0,0,0,0,0,15,0,Attack (29),Attack (30),,,Shapchanger,Adhesive,Gappler,2,450
+Basilisk,Monstrosity,52,15,2,16,8,15,2,8,7,0,0,0,0,0,0,20,0,Attack (31),,,,Petrifying Gaze (Basilisk),,,3,700
+Medusa,Monstrosity,127,15,3,10,15,16,12,13,15,0,0,0,0,0,0,30,0,Attack (89),Attack (32),Attack (2),Attack (8),Petrifying Gaze (Medusa),,,6,2300
+Orc,Humanoid,15,13,2,16,12,16,7,11,10,0,0,0,0,0,0,30,0,Attack (35),Attack (33),,,Aggressive,,,0.5,100
+Goblin,Humanoid,7,15,2,8,14,10,10,8,8,0,0,0,0,0,0,30,0,Attack (34),Attack (1),,,Nimble Escape,,,0.25,50
+Goblin boss,Humanoid,21,17,2,10,14,10,10,8,10,0,0,0,0,0,0,30,0,Attack (90),Attact (34),Attack (33),,Nimble Escape,,,2,450
+Sahuagin,Humanoid,22,12,2,13,11,12,12,13,9,0,0,0,0,0,0,30,0,Attack (91),Attack (36),Attack (37),Attack (38),Blood Frenzy,Limited Amphibiousness,Shark Telepathy,0.5,100
+Orc Chief,Humanoid,93,16,2,18,12,18,11,11,16,1,0,1,0,1,0,30,0,Attack (93),Attack (25),Attack (39),,Aggressive,Orc Fury,,4,1100
+Sahuagin Baron,Humanoid,76,16,3,19,15,16,14,13,17,0,1,1,1,1,0,30,1,Attack (92),Attack (40),Attack (41),Attack (42),Blood Frenzy,Limited Amphibiousness,Shark Telepathy,5,1800
+ ,,,,,,,,,,,,,,,,,,,,,,,,,,,
