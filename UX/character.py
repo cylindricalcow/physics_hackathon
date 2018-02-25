@@ -1,4 +1,5 @@
 import kivy
+import plyer
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -11,6 +12,8 @@ from kivy.uix.popup import Popup
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
+from kivy.properties import StringProperty
+from plyer import gps
 
 Builder.load_string("""
 <MainScreen>:
@@ -146,8 +149,23 @@ sm.add_widget(SecondScreen(name='second'))
 sm.add_widget(ThirdScreen(name='third'))
 
 class TestApp(App):
-	def build(self):
-		return sm
+    gps_location = StringProperty()
+    gps_status = StringProperty("Null")
+
+    def build(self):
+        try:
+            gps.configure(on_location=self.on_location, on_status=self.on_status)
+        except NotImplementedError:
+            import traceback
+            traceback.print_exc()
+            self.gps_status = "No GPS support"
+        return sm
+
+    def on_location(self, **kwargs):
+        self.gps_location = '\n'.join(['{}={}'.format(k, v) for k, v in kwargs.items()])
+
+    def on_status(self, stype, status):
+        self.gps_status = 'type={}\n{}'.format(stype, status)
 		
 test_app = TestApp()
 test_app.run()
