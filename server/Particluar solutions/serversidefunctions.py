@@ -5,7 +5,8 @@ from twisted.web import server, resource
 from twisted.internet import reactor, protocol
 from application import *
 from auth import *
-
+import os
+from requesthandler import *
 class MyClientFactory(protocol.ClientFactory):
     protocol = MyClient
 
@@ -32,8 +33,9 @@ class Server(object):
         reactor.run()
 
 
-    def requesthandler(dynamic=True, sych= False):
-        pass
+    def requesthandler(self,dynamic=True, sych= False):
+        reactor.listenTCP(self.port, MyHTTPFactory())
+        reactor.run()
 
     def datauploader():
 	pass
