@@ -18,7 +18,7 @@ class Echo(protocol.Protocol):
     def dataReceived(self, data):
         "As soon as any data is received, write it back."
         self.transport.write(data)
-        iter_test(1,3,100,0)
+        #iter_test(1,3,100,0)
 
 def main():
     """This runs the protocol on port 8000"""
