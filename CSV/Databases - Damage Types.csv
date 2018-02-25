@@ -1,0 +1,6 @@
+Type,#,,Attack Att.,#
+Bludgeoning,1,,STR,1
+Piercing,2,,DEX,2
+Slashing,3,,INT,3
+Necrotic,4,,WIS,4
+Poison,5,,CHA,5
