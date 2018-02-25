@@ -9,11 +9,17 @@ from kivy.graphics import Line
 
 Builder.load_string("""
 <MainScreen>:
+    canvas:
+        Color:
+            rgb: [.5,.5,.95]
+        Rectangle:
+            pos:self.pos
+            size:self.size
     RelativeLayout:
         Image:
-            source: "smiley.png"
-            pos: (root.width*.375, root.height*.5)
-            size_hint: .25,.5
+            source: "weird.png"
+            pos: (root.width*.375, root.height*.2)
+            size_hint: .25,.7
         Button:
             text: 'Inventory'
             pos: (root.width*0.8, root.y)
@@ -29,10 +35,10 @@ Builder.load_string("""
                 root.manager.current = 'third'
                 root.manager.transition.direction = 'right'
         Spinner:
-            text: "First"
+            text: "Yay!"
+            size_hint: .15,.05
             pos: (root.width/4, root.height/4)
-            size_hint: .1,.1
-            values: ["First", "Second", "Third"]
+            values: ["Why?", "Fuck.", "Shit."]
             id: spinner_id
             on_text: root.spinner_clicked(spinner_id.text)
 
@@ -67,6 +73,7 @@ class Painter(Widget):
         touch.ud["line"].points += [touch.x, touch.y]
 
 class MainScreen(Screen):
+    #toggle drop down menu
     def spinner_clicked(self, value):
         print("Spinner Value " + value)
 
