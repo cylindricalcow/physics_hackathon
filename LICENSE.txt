@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2018 Jonathan Richman Anil Radhakrishnan
+Copyright (c) 2018 Jonathan Richman Anil Radhakrishnan Grace Sun Alex Layton Camille Faruggio Iain Carpenter Shane Cowsert Anthony Bennett Alicia Huang Jacquelyn Schmidt Orlando Melchor-Alonso Sarah Habib Karm Nagi
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
