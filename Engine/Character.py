@@ -29,19 +29,69 @@ class Character:
             self.magic_user=False #depeding on class info from database
             if self.magic_user:
                 make_spell_slots
-
+            #Conditions      
+            self.paralyzed=False 
+            self.poisoned=False
+            self.healthremoval=False
+            self.grappled=False
+            self.prone=False
+            self.petrified=False
+            self.restrained=False
+            self.advantageagainst=False
+            self.moveslow=False   
+          ######################END INIT  
+    def getspeed(self):
+        if(self.grappled==True or self.petrified==True or self.restrained==True):
+            return 0
+        if(self.moveslow==True or self.prone==True):
+            return self.speed/2
+        return self.speed
+        
+    def restrained(self):
+        self.restrained==True
+        
+        
+        
+    #############################BEGIN GETTERS  
     def get_str(self):
-        return stats[0]
+        return self.stats[0]
     def get_dex(self):
-        return stats[1]
+        return self.stats[1]
     def get_con(self):
-        return stats[2]
+        return self.stats[2]
     def get_int(self):
-        return stats[3]
+        return self.stats[3]
     def get_wis(self):
-        return stats[4]
+        return self.stats[4]
     def get_cha(self):
-        return stats[5]
+        return self.stats[5]
+    def get_strmod(self):
+        return self.mods[0]
+    def get_dexmod(self):
+        return self.mods[1]
+    def get_conmod(self):
+        return self.mods[2]
+    def get_intmod(self):
+        return self.mods[3]
+    def get_wismod(self):
+        return self.mods[4]
+    def get_chamod(self):
+        return self.mods[5]
+    ##############################END GETTERS
+    ##############################BEGIN SETTERS
+    def set_strmod(self, value):
+        self.mods[0]=value
+    def set_dexmod(self, value):
+        self.mods[1]=value
+    def set_conmod(self, value):
+        self.mods[2]=value
+    def set_intmod(self, value):
+        self.mods[3]=value
+    def set_wismod(self, value):
+        self.mods[4]=value
+    def set_chamod(self, value):
+        self.mods[5]=value
+    ##############################END SETTERS
 
     def make_spell_slots(self):   
         self.max_cast_level=seeclass #add from database depending on level
