@@ -80,5 +80,5 @@ checker = checkers.InMemoryUsernamePasswordDatabaseDontUse()
 checker.addUser("user", "pass")
 myPortal.registerChecker(checker)
 
-reactor.listenTCP(8000, EchoFactory(myPortal))
+reactor.listenTCP(8080, EchoFactory(myPortal))
 reactor.run()
