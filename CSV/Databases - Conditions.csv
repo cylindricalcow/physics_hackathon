@@ -1,8 +1,10 @@
-Condition ,#
-Paralyzed,1
-Poisoned ,2
-Health Removal,3
-Grappled,4
-Prone,5
-Petrified,6
-Restrained,7
+Condition ,#,Speed,HP,Skip Turn
+Paralyzed,1,Speed-Speed,,1
+Poisoned ,2,,,
+Health Removal,3,,,
+Grappled,4,,,
+Prone,5,,,
+Petrified,6,,,
+Restrained,7,,,
+Advantage Against,8,,,
+Move Slow,9,,,
