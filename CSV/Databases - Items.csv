@@ -1,0 +1,45 @@
+NAME,1 Hand,2 Hands ,Action,Weight
+Unarmed Strike,1,1,1,0
+Club,1,0,1,2
+Dagger,1,0,1,1
+Greatclub,0,1,1,10
+Handaxe,1,0,1,2
+Javelin,1,0,1,2
+Light Hammer,1,0,1,2
+Mace,1,0,1,4
+Sickle,1,0,1,2
+ Spear,1,1,1,3
+ Quarterstaff,1,1,1,4
+Light Crossbow,0,1,1,5
+Dart,1,0,1,0.25
+Shortbow,0,1,1,2
+Sling,1,0,1,0
+Flail,1,0,1,2
+Glaive ,0,1,1,6
+Greataxe,0,1,1,7
+Greatsword,0,1,1,6
+Halberd ,0,1,1,6
+Lance,0,1,1,6
+Maul,0,1,1,10
+Morningstar,1,0,1,4
+Pike,0,1,1,18
+Rapier,1,0,1,2
+Scimitar ,1,0,1,3
+Shortsword,1,0,1,2
+War Pick,1,0,1,2
+Whip,1,0,1,4
+Longsword,1,1,1,3
+ Battleaxe,1,1,1,4
+ Trident,1,1,1,4
+ Warhammer,1,1,1,2
+Blowgun,1,0,1,1
+Hand Crossbow,1,0,1,3
+Heavy Crossbow,0,1,1,18
+Longbow,0,1,1,2
+Net,1,0,1,3
+Potion of Healing,0,0,1,0.5
+Potion of Buffing,0,0,1,0.5
+Light Armor,0,0,0,10
+Medium Armor,0,0,0,20
+Heavy Armor,0,0,0,60
+Shield,1,0,0,6
