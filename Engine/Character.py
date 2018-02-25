@@ -7,7 +7,7 @@ class Character:
     def __init__(self, raceclass='human fighter',new_player=False, **kwargs):
         self.raceclass = raceclass
         if new_player:
-        #in stats/stat_mods, index 0-5 correspond to STR, DEX, CON,INT, WIS, and CHA respectively
+        #in stats/stat_mods, index 0-5 correspond to STR, DEX, CON,INT, WIS, and CHA respectively            
             self.art=databaseart#this is gonna come from the database eventually            
             self.stats = self.statline()  # Needs to be user defined. Use Kivy
             self.stat_mods = self.modifiers(self.stats)
@@ -22,6 +22,7 @@ class Character:
             self.equipped_items=[]
             self.available_actions=[]
             self.available_bonus_actions=[]
+            self.dodging=False
         # dice roll will be dependent on weapon attack values in database
             self.weapon_damage = self.proficiency(self.level)+self.stat_mods[0]+game.dice(8)
             self.magic_user=False #depeding on class info from database
