@@ -17,7 +17,7 @@ Builder.load_string("""
             size:self.size
     RelativeLayout:
         Image:
-            source: "weird.png"
+            source: "../Images/Characters/Human fighter.png"
             pos: (root.width*.375, root.height*.2)
             size_hint: .25,.7
         Button:
