@@ -41,15 +41,9 @@ class Character:
             self.moveslow=False   
           ######################END INIT  
     def getspeed(self):
-        if(self.grappled==True):
+        if(self.grappled==True or self.petrified==True or self.restrained==True):
             return 0
-        if(self.petrified==True):
-            return 0
-        if(self.restrained==True):
-            return 0
-        if(self.moveslow==True):
-            return self.speed/2
-        if(self.prone==True):
+        if(self.moveslow==True or self.prone==True):
             return self.speed/2
         return self.speed
         
