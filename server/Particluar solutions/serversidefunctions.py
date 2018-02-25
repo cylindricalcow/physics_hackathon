@@ -42,4 +42,4 @@ class Server(object):
 
 
     def closeserver():
-        pass
+        reactor.stop()
