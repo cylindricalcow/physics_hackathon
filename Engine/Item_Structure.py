@@ -2,15 +2,21 @@ import numpy as np
 import numpy.random as random
 import game_functions as game
 from abc import ABC, abstractmethod
+import sqlite3
 
 # run csv_to_sql here
-c = conn.cursor()
+path = "C:/Users/Grace Sun/physics_hackathon/Databases"
+# name additional conn based on what databases you want to input; make sure to close conn at the end!
+conn1 = sqlite3.connect(path+"Items"+".db") 
+c = conn1.cursor()
 
 class Item(ABC):
     def __init__(self, Item_Name, **kwargs):
-        pass
-        self.weight = c.execute('SELECT Weight FROM Items WHERE NAME = Item_Name') 
-        
+        #fetchone()[0] for the float
+        self.Weight = c.execute('SELECT Weight FROM Items WHERE NAME = ?', [Item_Name]).fetchone()[0] 
+
+#test = Item('Club')
+#print(test.Weight)
 
 class Equippable(Item):
     def __init__(self, owner):
@@ -46,3 +52,4 @@ class Shield(Equippable):
     def __init__(self):
         pass
 
+conn1.close()
