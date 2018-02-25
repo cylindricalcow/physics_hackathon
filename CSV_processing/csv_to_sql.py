@@ -1,19 +1,12 @@
 import pandas as pd
-import sqlite3 as lite
+import sqlite3
 
-<<<<<<< HEAD
-path="D://physics_hackathon//" 
-db_path=path+"Databases//"
-string = "Spells"
-df=pd.read_csv(path+"CSV//Databases - "+string+".csv")
-df.to_sql(string, db_path+string+".db") #Figure out how to make connection string
-=======
 path = "C:/Users/Grace Sun/physics_hackathon/CSV" 
 db_path = path+'/Databases'
-strings = ["Attacks", "Characters", "Conditions", "Damage Types", "Monsters", "Save Types", "Spells", "Weapons"]
-conn = lite.connect(db_path)
+strings = ["Attacks", "Characters", "Cleric", "Conditions", "Damage Types", "Fighter", "Items", "Monsters", "Rogue", "Save Types", "Spells", "Weapons", "Wizard"]
 
 for string in strings:
+	conn = sqlite3.connect(db_path+string+".db")
 	df = pd.read_csv(path+"/Databases - "+string+".csv")
-	df.to_sql(string, conn, if_exists = 'replace') 
->>>>>>> 66b10067b31357f02c3e1cd993b25e577faaecbd
+	df.to_sql(string, conn, if_exists = 'replace')
+	conn.close 

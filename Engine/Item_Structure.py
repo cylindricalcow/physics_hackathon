@@ -3,10 +3,14 @@ import numpy.random as random
 import game_functions as game
 from abc import ABC, abstractmethod
 
+# run csv_to_sql here
+c = conn.cursor()
 
 class Item(ABC):
     def __init__(self, Item_Name, **kwargs):
         pass
+        self.weight = c.execute('SELECT Weight FROM Items WHERE NAME = Item_Name') 
+        
 
 class Equippable(Item):
     def __init__(self, owner):
