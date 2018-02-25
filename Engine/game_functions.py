@@ -42,17 +42,14 @@ def initiative_roll(dex, adv=False, disadv=False):
     init = d20(adv, disadv) + dex
     return init
     
-def initiative_order(roll_dict):#accepts a dict with playernames as keys referencing integer values of initiative rolls
-    turn_order=[]#an ordered list with the names of characters in order of turns    
-    rollslist=list(set(roll_dict.values())
-    rollslist.sort()
-    rollslist=list(reversed(rollslist))
-    for i in range(len(rollslist)):
-        for key in roll_dict.keys():
-            if roll_dict[key]==rollslist[i]:
-                turn_order.append(key)
-    return(turn_order)
-    
+def Initiative_Order(rolls): #Takes in dict, returns initiative order
+    sorted_x = sorted(rolls.items(), key=operator.itemgetter(1))[::-1]
+    #sorted(rolls.items(), key= lambda (k,v1):v2)
+    #print (OrderedDict(sorted(rolls.items(),key=lambda (k, v:v[1]) ))
+    players=[]
+    for player_init in sorted_x:
+        players.append(player_init[0])
+    return players
 
 
 def save_throw(stat, adv=False, disadv=False, proficiency=False): #Takes in stat, additional parameters for adv/disadv effects, and for proficiency
@@ -70,15 +67,3 @@ def statline(): #Function creates a 6 element numpy array defining character's s
 		stat[i] = droplow
 	return stat
  
- def calclevel(xp):#function takes a current xp value and gives a current player level
-     import numpy as np
-     xplist=[300,900,2700,6500,14000,23000,34000,48000,64000,85000,100000,120000,140000,165000,195000,225000,265000,305000,355000]
-     levellist=np.arange(1,20)
-     if xp>6500:
-         c,b,a=np.polyfit(xplist,levellist,2)
-         level=np.floor(c*xp**2+b*xp+a)
-         return(level)
-    else:
-        b,a=np.polyfit(xplist,levellist,1)
-         level=np.floor(b*xp+a)
-         return(level)
