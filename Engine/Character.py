@@ -20,6 +20,8 @@ class Character:
             self.hp = game.dice(8) + self.stat_mods[2]
             self.items=[]#again: starting items? class-dependent?
             self.equipped_items=[]
+            self.available_actions=[]
+            self.available_bonus_actions=[]
         # dice roll will be dependent on weapon attack values in database
             self.weapon_damage = self.proficiency(self.level)+self.stat_mods[0]+game.dice(8)
             self.magic_user=False #depeding on class info from database
