@@ -85,4 +85,4 @@ def makeattackdict(file):
         
 
 
-makeattackdict("spreadsheets\Attacks.csv")
+makeattackdict("Attacks.csv")
