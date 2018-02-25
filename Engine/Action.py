@@ -25,7 +25,11 @@ class WeaponAttack(Action):
         self.damage=dice(database_type,database_number)#more placeholders
         
     def execute(self,target):
-        to_hit_bonus =self.source.stats
-        ac = target.ac
-        hit()
-        target.h
+        self.to_hit_bonus =self.source.stats[self.to_hit_stat] and (self.wrange>=distance(self.source,self.target))
+        self.ac = self.target.ac
+        self.hit=hit(self.to_hit_bonus,self.ac)
+        if self.hit:
+            target.apply_damage(self.damage)
+            
+            
+class 
