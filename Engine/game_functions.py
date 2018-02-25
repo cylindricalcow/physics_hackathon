@@ -1,9 +1,13 @@
 import numpy as np
 import numpy.random as random
+import operator
 
-
-def dice(n):  # Takes in an int, returns roll on n-sided die
-    return random.randint(1, n + 1)
+def dice(number_dice, nsides):  # Takes in an int, returns roll on n-sided die
+    rolled = 0
+    for die in range(number_dice):
+        roll=random.randint(1, nsides+1)
+        rolled+=roll 
+    return rolled
 
 
 # Takes in Hit Bonus and armor class, returns True if you hit
@@ -67,3 +71,4 @@ def statline(): #Function creates a 6 element numpy array defining character's s
 		stat[i] = droplow
 	return stat
  
+

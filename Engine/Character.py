@@ -17,7 +17,7 @@ class Character:
             self.level = self.lvl(self.XP)
             self.prof = self.proficiency(self.level)
         # Dummy code, the dice command depends on a character's raceclass
-            self.hp = game.dice(8) + self.stat_mods[2]
+            self.hp = game.dice(self.level,8) + self.stat_mods[2]
             self.items=[]#again: starting items? class-dependent?
             self.equipped_items=[]
             self.available_actions=[]
@@ -132,16 +132,8 @@ class Character:
 
     def proficiency(self, level):
         lvl = self.level
-        if (lvl > 0 and lvl < 5):
-            return 2
-        if (lvl >= 5 and lvl < 9):
-            return 3
-        if (lvl >= 9 and lvl < 13):
-            return 4
-        if (lvl >= 13 and lvl < 17):
-            return 5
-        if (lvl >= 17):
-            return 6
+        prof=np.floor(lvl/4+2)
+        return prof
             
     def ability_score_improvement(self, userinput): # takes some form of user input to pull total allowed points addable from database and distribute them among stat scores
         self.stats+=userinput
