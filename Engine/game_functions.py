@@ -71,4 +71,8 @@ def statline(): #Function creates a 6 element numpy array defining character's s
 		stat[i] = droplow
 	return stat
  
-
+def distance_to(player,target):
+    deltax=target.position[0]-player.position[0]
+    deltay=target.position[1]-player.position[1]
+    distance=(deltax**2+deltay**2)**(1/2)
+    return(distance)
