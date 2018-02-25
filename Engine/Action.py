@@ -4,8 +4,17 @@ Created on Sun Feb 25 01:31:32 2018
 
 @author: CammieFarruggio
 """
+
+from Character import grappled
+from Character import poisoned
+from Character import paralyzed
+from Character import prone
+from Character import petrified
+from Character import restrained
 from game_functions import *
+from game_functions import hit
 from abc import ABC, abstractmethod
+
 class Action(ABC):
     def __init__(self):
         #self.owner
@@ -31,9 +40,16 @@ class WeaponAttack(Action):
         self.totaldamage=dice(database_type,database_number)#more placeholders
         
     def execute(self):
+        adv=False
+        disadv=False
+        #distance=the distance between self and target
+        if(target.restrained or target.poisoned or target.paralyzed or (target.prone and distance<=5)):
+            adv=True
+        if(self.restrained or self.poisoned or (target.prone and distance>5)):
+            disadv=True
         self.to_hit_bonus =self.source.stats[self.to_hit_stat]
         self.ac = self.target.ac
-        self.hit=hit(self.to_hit_bonus,self.ac,adv,disadv) and (self.wrange>=distance(self.source,self.target))
+        self.hit=hit(self.to_hit_bonus,self.ac,adv,disadv,target) and (self.wrange>=distance(self.source,self.target))
         if self.hit:
             target.apply_damage(self.totaldamage)
             
