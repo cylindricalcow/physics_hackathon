@@ -51,6 +51,7 @@ class Character:
             return self.speed/2
         if(self.prone==True):
             return self.speed/2
+        return self.speed;
         
     def restrained(self):
         self.restrained==True
