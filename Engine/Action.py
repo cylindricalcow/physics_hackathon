@@ -16,7 +16,7 @@ class Action(ABC):
         pass
     
 class WeaponAttack(Action):
-    def __init__(self,attack,source, target, wrange, adv=False,disadv=False):       
+    def __init__(self,attack,source,target, wrange,adv=False,disadv=False):       
         self.attack=attack
         self.to_hit_stat=self.attack.whateverstat#as incorporated in item as pulled from database
         self.source=source
@@ -36,6 +36,7 @@ class WeaponAttack(Action):
         self.hit=hit(self.to_hit_bonus,self.ac,adv,disadv) and (self.wrange>=distance(self.source,self.target))
         if self.hit:
             target.apply_damage(self.totaldamage)
+            #apply any contitions that the attack causes
             
             
 class Cast(Action):
@@ -46,5 +47,10 @@ class Cast(Action):
         self.crange=crange
         
     def execute(self):
+        self.save_stat=a
         
-        
+class Dash(Action):
+    
+
+class Dodge(Action):
+    
