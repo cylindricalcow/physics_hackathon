@@ -57,7 +57,7 @@ def Initiative_Order(rolls): #Takes in dict, returns initiative order
 
 
 def save_throw(stat, adv=False, disadv=False, proficiency=False): #Takes in stat, additional parameters for adv/disadv effects, and for proficiency
-	if proficiency:
+	if prof:
 		return d20(adv, disadv)+stat+proficiency
 	else:
 		return d20(adv, disadv)+stat
@@ -71,7 +71,7 @@ def statline(): #Function creates a 6 element numpy array defining character's s
 		stat[i] = droplow
 	return stat
  
-def distance_to(player,target):
+def distance(player,target):
     deltax=target.position[0]-player.position[0]
     deltay=target.position[1]-player.position[1]
     distance=(deltax**2+deltay**2)**(1/2)
