@@ -16,6 +16,69 @@ from kivy.properties import StringProperty
 from plyer import gps
 
 Builder.load_string("""
+
+<CustLabel@Label>:
+    color: 0, 0, 0, 1
+
+<LoginScreen>:
+    canvas:
+        Color:
+            rgb: [.5,.5,.95]
+        Rectangle:
+            pos:self.pos
+            size:self.size
+    RelativeLayout:
+        Button:
+            text: 'Character Page'
+            pos: (root.width*0.8, root.y)
+            size_hint: .2,.1
+            on_press: 
+                root.manager.current = 'main'
+                root.manager.transition.direction = 'left'
+        Label:
+            text: "Welcome to your Dreamscape:"
+            pos: (root.width*.25, root.height*.35)
+            size_hint: .5,.8
+        Label:
+            text: "Drogens and Dungoons"
+            pos: (root.width*.25, root.height*.25)
+            size_hint: .5,.8
+    GridLayout:
+        orientation: "horizontal"
+        rows:1
+        cols:3
+        size_hint: .3,.1
+        pos: (root.width*.35,root.height*.5)
+        Spinner:
+            text: 'Name'
+            values: ["Majones", "Cryan Blark", "Sexlando", "Bobert"]
+            id: spinner_id
+            on_text: root.spinner_clicked(spinner_id.text)
+        Spinner:
+            text: 'Class'
+            values: ["cleric", "wizard", "rogue", "fighter"]
+            id: spinner_id
+            on_text: root.spinner_clicked(spinner_id.text)
+        Spinner:
+            text: 'Race'
+            values: ["Dwarf", "Elf", "Halfing", "Human"]
+            id: spinner_id
+            on_text: root.spinner_clicked(spinner_id.text)
+    GridLayout:
+        RelativeLayout:
+            orientation: "horizontal"
+            pos: root.width*.1, root.height*.3
+            size_hint: .4, 0.2
+            CustLabel:
+                text: str(slider_id.value)
+            Slider:
+                id: slider_id
+                min: 0
+                max: 30
+                value: 0
+                step: 1
+
+
 <MainScreen>:
     canvas:
         Color:
@@ -73,6 +136,12 @@ Builder.load_string("""
             size_hint: .8,.05
 
 <SecondScreen>:
+    canvas:
+        Color:
+            rgb: [.5,.5,.95]
+        Rectangle:
+            pos:self.pos
+            size:self.size
     RelativeLayout:
         Button:
             text: 'Character Stats'
@@ -97,6 +166,12 @@ Builder.load_string("""
             on_text: root.spinner_clicked(spinner_id.text)
 
 <ThirdScreen>:
+    canvas:
+        Color:
+            rgb: [.5,.5,.95]
+        Rectangle:
+            pos:self.pos
+            size:self.size
     RelativeLayout:
         Button:
             text: 'Character Stats'
@@ -216,6 +291,10 @@ class Painter(Widget):
     def on_touch_move(self,touch):
         touch.ud["line"].points += [touch.x, touch.y]
 
+class LoginScreen(Screen):
+    def spinner_clicked(self, value):
+        print("Spinner Value " + value)
+
 class MainScreen(Screen):
     #toggle drop down menu
     def spinner_clicked(self, value):
@@ -236,6 +315,7 @@ class ThirdScreen(Screen):
         the_popup.open()    
 
 sm = ScreenManager()
+sm.add_widget(LoginScreen(name='login'))
 sm.add_widget(MainScreen(name='main'))
 sm.add_widget(SecondScreen(name='second'))
 sm.add_widget(ThirdScreen(name='third'))
