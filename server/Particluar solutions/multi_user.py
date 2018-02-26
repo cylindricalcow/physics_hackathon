@@ -2,8 +2,9 @@
 from test_func import *
 from twisted.internet import reactor, protocol
 
-HOST = 'localhost'
-PORT = 8000
+#IP of our Rasberry Pi server
+HOST = '192.17.211.73'
+PORT = 8080
 
 class MyClient(protocol.Protocol):
     def connectionMade(self):
