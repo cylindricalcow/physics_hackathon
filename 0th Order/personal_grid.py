@@ -7,12 +7,25 @@ import math
 
 class Grid:
     #A class for what a person would see on their screen
-    def __init__(N):    
+    def __init__(self,N):    
         self.N=N  #N is gridsize aka vision radius
 
     def create_local_grid(self):
-        return np.meshgrid(np.arange(-1*floor(self.N/2),floor(self.N/2)),floor(self.N/2),floor(self.N/2)))
-        
+        return np.meshgrid(np.arange(-1*math.floor(self.N/2),math.floor(self.N/2)),np.arange(-1*math.floor(self.N/2),math.floor(self.N/2)))
+
+    def arrow_endpoint(self, target_x, target_y):
+         #Want to make arrow for characters outside of vision. Don't sure if this is a
+         #good feature, but it could be useful. Want the arrow to be small on the border
+         print(target_x, target_y)
+         m,b=np.polyfit([0,target_x],[0,target_y],1)
+         print(m,b)
+         line=np.poly1d(m,b)
+         x_vals=np.arange(-1*math.floor(self.N),math.floor(self.N))
+         y_vals=[m * i + b for i in x_vals]
+         print(y_vals)
+         for i in range(len(x_vals)):
+             if np.sqrt(y_vals[i]**2 +x_vals[i]**2) >self.N/2:
+                 return x_vals[i-1],y_vals[i-1],x_vals[i],y_vals[i]
     def plot_map(self, team_coords, monster_coords):
     #Use server to find teammates positions in the future                                     
     #team_coords is dict of 2 element arrays
@@ -23,18 +36,23 @@ class Grid:
         for key in team_coords.keys():
             x_friends.append(team_coords[key][0])
             y_friends.append(team_coords[key][1])
-        plt.scatter(x_friends,y_friends, color='blue')
-        plt.scatter(monster_coords[0],monster_coords[1], color='red')
-        plt.scatter([0],[0], color='green')
-        plt.xlim(grid_x)
-        plt.ylim(grid_y)                                 
-        plt.grid(True)
+        distance_challenged=[]
+        for i in range(len(x_friends)):
+            if (x_friends[i] or y_friends[i])>self.N/2:
+                print(self.arrow_endpoint(x_friends[i],y_friends[i]))
+                distance_challenged.append(self.arrow_endpoint(x_friends[i],y_friends[i]))
+        ax=plt.axes()        
+        ax.scatter(x_friends,y_friends, color='blue')
+        ax.scatter(monster_coords[0],monster_coords[1], color='red')
+        ax.scatter([0],[0], color='green')
+        for pair in distance_challenged:
+            ax.arrow(pair[0],pair[1],pair[2],pair[3],head_width=0.5, head_length=1, fc='k', ec='k') 
+        ax.set_xlim(-1*math.floor(self.N),math.floor(self.N)+2)
+        ax.set_ylim(-1*math.floor(self.N),math.floor(self.N)+2)                                 
+        ax.grid(True)
+        plt.savefig('test_arrow.png')
         plt.show()
-
-    def arrow_endpoint(self, target_x, target_y):
-         #Want to make arrow for characters outside of vision. Don't sure if this is a
-         #good feature, but it could be useful
-         pass
+    
          
 test=Grid(10)
-test.arrow_to_help({'Alice':[11,7],'Bob':[2,4], 'Rob':[3,2], 'Bobert':[0,5]},[2,2])
+test.plot_map({'Alice':[11,7],'Bob':[2,4], 'Rob':[3,2], 'Bobert':[1,5]},[2,2])
