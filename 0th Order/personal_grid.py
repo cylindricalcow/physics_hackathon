@@ -18,14 +18,14 @@ class Grid:
          #good feature, but it could be useful. Want the arrow to be small on the border
          print(target_x, target_y)
          m,b=np.polyfit([0,target_x],[0,target_y],1)
-         print(m,b)
          line=np.poly1d(m,b)
          x_vals=np.arange(-1*math.floor(self.N),math.floor(self.N))
          y_vals=[m * i + b for i in x_vals]
          print(y_vals)
-         for i in range(len(x_vals)):
-             if np.sqrt(y_vals[i]**2 +x_vals[i]**2) >self.N/2:
-                 return x_vals[i-1],y_vals[i-1],x_vals[i],y_vals[i]
+         return x_vals[-6],y_vals[-6],x_vals[-5],y_vals[-5]
+         #for i in range(len(x_vals)):
+             #if np.sqrt(y_vals[i]**2 +x_vals[i]**2) >self.N/2:
+             #    return x_vals[i-1],y_vals[i-1],x_vals[i],y_vals[i]
     def plot_map(self, team_coords, monster_coords):
     #Use server to find teammates positions in the future                                     
     #team_coords is dict of 2 element arrays
@@ -45,8 +45,9 @@ class Grid:
         ax.scatter(x_friends,y_friends, color='blue')
         ax.scatter(monster_coords[0],monster_coords[1], color='red')
         ax.scatter([0],[0], color='green')
+        scaler=0.8
         for pair in distance_challenged:
-            ax.arrow(pair[0],pair[1],pair[2],pair[3],head_width=0.5, head_length=1, fc='k', ec='k') 
+            ax.arrow(scaler*pair[0],scaler*pair[1],scaler*pair[2],scaler*pair[3],head_width=0.2, head_length=0.5, fc='k', ec='k') 
         ax.set_xlim(-1*math.floor(self.N),math.floor(self.N)+2)
         ax.set_ylim(-1*math.floor(self.N),math.floor(self.N)+2)                                 
         ax.grid(True)
@@ -55,4 +56,4 @@ class Grid:
     
          
 test=Grid(10)
-test.plot_map({'Alice':[11,7],'Bob':[2,4], 'Rob':[3,2], 'Bobert':[1,5]},[2,2])
+test.plot_map({'Alice':[11,7],'Bob':[2,4], 'Rob':[-3,-2], 'Bobert':[1,5]},[2,2])
