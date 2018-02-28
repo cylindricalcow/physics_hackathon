@@ -32,6 +32,10 @@ class DM:
         for i in len(self.players):
             if self.players[i][2]==target:
                 self.players[i][1]=hp-damage
+    def get_players(self):
+        return self.players
+    def get_monsters(self):
+        return self.monsters
 class Grid:
     #A class for what a person would see on their screen
     def __init__(self,N):    
@@ -53,11 +57,13 @@ class Grid:
          #for i in range(len(x_vals)):
              #if np.sqrt(y_vals[i]**2 +x_vals[i]**2) >self.N/2:
              #    return x_vals[i-1],y_vals[i-1],x_vals[i],y_vals[i]
-    def plot_map(self, team_coords, monster_coords):
+    def plot_map(self):
     #Use server to find teammates positions in the future                                     
     #team_coords is dict of 2 element arrays
     #monster_coords is 2 element array
-    #Add health bars    
+    #Add health bars
+        team_coords=DM.get_players()[0]
+        monster_coords=DM.get_monsters()[0]
         grid_x,grid_y=self.create_local_grid()
         x_friends=[]
         y_friends=[]                                 
@@ -81,10 +87,11 @@ class Grid:
         ax.grid(True)
         plt.savefig('test_arrow.png')
         plt.show()
-    
-         
-#test=Grid(10)
-#test.plot_map({'Alice':[11,7],'Bob':[2,4], 'Rob':[-3,-2], 'Bobert':[1,5]},[2,2])
+#DM=np.array([np.array([x,y]),health, name])
+print(len(np.array([[np.array([11,7]),69,'Alice'],[np.array([2,4]),69,'Bob'],[np.array([-3,-2]),69,'Rob'],[np.array([1,5]),69,'Bobert']])))
+Iain=DM(np.array([[np.array([11,7]),69,'Alice'],[np.array([2,4]),69,'Bob'],[np.array([-3,-2]),69,'Rob'],[np.array([1,5]),69,'Bobert']]),np.array([np.array([2,2]),420,'Dragon McDragonface']))       
+test=Grid(10)
+test.plot_map()
 
 #Class for updating postions of allies with respect to the person. Positions of people should all be stored with the DM
 
