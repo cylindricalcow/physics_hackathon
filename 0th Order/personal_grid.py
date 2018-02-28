@@ -5,6 +5,33 @@ import math
 #These are test classes for the server that will act like the UI. The goal is to get this
 #class to work with the engine and server. The grid class 
 
+class DM:
+    #Class for what the DM will see/keep track of
+    def __init__(self,players, monsters):
+        #character data must be numpy arrays with np.array([np.array([x,y]),health, name])
+        self.players=players
+        self.monsters=monsters
+        
+    def coord_transform(self, target):
+        #Go from positions on global grid to person's POV
+        #Everything
+        new_pos=[]
+        for char in players:
+            if char!=target:
+                new_pos.append(np.array(np.array(char[0]-target[0]), char[1], char[2]))
+                
+        return new_pos
+    def update_hp(self, target, damage):
+        #target is string name aka player[2]
+        for i in len(self.players):
+            if self.players[i][2]==target:
+                self.players[i][1]=hp-damage
+                 
+    def update_pos(self, target, new_loc):
+        #target is string name aka player[2]
+        for i in len(self.players):
+            if self.players[i][2]==target:
+                self.players[i][1]=hp-damage
 class Grid:
     #A class for what a person would see on their screen
     def __init__(self,N):    
@@ -30,6 +57,7 @@ class Grid:
     #Use server to find teammates positions in the future                                     
     #team_coords is dict of 2 element arrays
     #monster_coords is 2 element array
+    #Add health bars    
         grid_x,grid_y=self.create_local_grid()
         x_friends=[]
         y_friends=[]                                 
@@ -55,5 +83,8 @@ class Grid:
         plt.show()
     
          
-test=Grid(10)
-test.plot_map({'Alice':[11,7],'Bob':[2,4], 'Rob':[-3,-2], 'Bobert':[1,5]},[2,2])
+#test=Grid(10)
+#test.plot_map({'Alice':[11,7],'Bob':[2,4], 'Rob':[-3,-2], 'Bobert':[1,5]},[2,2])
+
+#Class for updating postions of allies with respect to the person. Positions of people should all be stored with the DM
+
