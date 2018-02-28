@@ -1,7 +1,9 @@
 <CustLabel@Label>:
-    color: 0, 0, 0, 1
+    color: (0, 0, 0, 1)
 
+#Login Screen to create character
 <LoginScreen>:
+    #Set Background
     RelativeLayout:
         pos: 0,0
         canvas.before:
@@ -9,23 +11,8 @@
                 source: 'Images/Backgrounds/Character Background.png'
                 pos: self.x,self.y
                 size: self.width, self.height
-        TextInput:
-            pos: (root.width*.25, root.height*.2)
-            size_hint: .3,.05
-            id: my_user_input
-            text: ""
-        Label:
-            id: my_output
-            pos: (root.width*.25, root.height*.05)
-            size_hint: .5,.2
-            text: my_user_input.text
-        Button:
-            text: 'Character Page'
-            pos: (root.width*0.8, root.y)
-            size_hint: .2,.1
-            on_press: 
-                root.manager.current = 'main'
-                root.manager.transition.direction = 'left'
+    RelativeLayout:
+    #Set Title
         Label:
             text: "Welcome to your Dreamscape:"
             pos: (root.width*.25, root.height*.35)
@@ -34,43 +21,47 @@
             text: "Drogens and Dungoons"
             pos: (root.width*.25, root.height*.25)
             size_hint: .5,.8
+    #Build character
     GridLayout:
-        orientation: "horizontal"
-        rows:1
-        cols:3
-        size_hint: .3,.1
-        pos: (root.width*.35,root.height*.5)
+        orientation: "vertical"
+        rows: 2
+        cols: 3
+        pos: (root.width*.15, root.height*.5)
+        size_hint: .6,.1
+        Label:
+            text: 'Name:'
+        TextInput:
+            id: full_name
+            size_hint: 1.6,.1
+        Button:
+            text: "submit"
+            on_press: 
+                root.save_name()
+        Label:
+            text: 'Class and Race:'
         Spinner:
-            text: 'Name'
-            values: ["Majones", "Cryan Blark", "Sexlando", "Bobert"]
-            id: spinner_id1
-            on_text: root.spinner_clicked(spinner_id1.text)
-        Spinner:
-            text: 'Class'
-            values: ["cleric", "wizard", "rogue", "fighter"]
-            id: spinner_id2
-            on_text: root.spinner_clicked(spinner_id2.text)
-        Spinner:
-            text: 'Race'
-            values: ["Dwarf", "Elf", "Halfing", "Human"]
-            id: spinner_id3
-            on_text: root.spinner_clicked(spinner_id3.text)
-    GridLayout:
-        RelativeLayout:
-            orientation: "horizontal"
-            pos: root.width*.1, root.height*.3
-            size_hint: .4, 0.2
-            CustLabel:
-                text: str(slider_id.value)
-            Slider:
-                id: slider_id
-                min: 0
-                max: 30
-                value: 0
-                step: 1
+            id: class_name
+            size_hint: 1.6,.1
+            text: '---'
+            values: ["---", "Dwarf Cleric", "Elf Wizard", "Halfling Rogue", "Human Fighter"]
+            on_text: root.save_class(class_name.text)
+        Label:
 
+    #Buttons to change windows from Login
+    RelativeLayout:
+        Button:
+            id: statement
+            text: 'Character Page'
+            pos: (root.width*0.8, root.y)
+            size_hint: .2,.1
+            on_press:
+                root.manager.get_screen('main').store_description()
+                root.manager.current = 'main'
+                root.manager.transition.direction = 'left'
 
+#Character stats and information screen
 <MainScreen>:
+    #Images for the character 
     RelativeLayout:
         pos: 0,0
         canvas.before:
@@ -79,9 +70,44 @@
                 pos: self.x,self.y
                 size: self.width, self.height
         Image:
-            source: "Images/Characters/Dwarf Cleric.png"
+            id: image
             pos: (root.width*.4, root.height*.45)
             size_hint: .2, .6
+    #Character infromation
+    RelativeLayout:
+        Label:
+            id: description
+            pos: (root.width*.1, root.height*.5)
+            size_hint: .8,.05
+        Label:
+            text: "This is going to be a description of the fighter"
+            pos: (root.width*.1, root.height*.25)
+            size_hint: .8,.05
+    #Important Character attributes
+    RelativeLayout:
+        Label:
+            text: "HP: 10"
+            pos: (root.width*(.4-.2), root.height*.44)
+            size_hint: .2,.1
+        Label:
+            text: "AC: 10"
+            pos: (root.width*.4, root.height*.44)
+            size_hint: .2,.1
+        Label:
+            text: "SP: 10"
+            pos: (root.width*(.4+0.2), root.height*.44)
+            size_hint: .2,.1
+    #Buttons to check the character stats
+    RelativeLayout:
+        orientation: 'horizontal'
+        pos: (root.width*.4, root.height*.36)
+        size_hint: .2,.1
+        # When clicked the popup opens
+        Button:
+            text: 'Stats'
+            on_press: root.open_popup()
+    #Buttons to change windows from the character page
+    RelativeLayout:
         Button:
             text: 'Inventory'
             pos: (root.width*0.8, root.y)
@@ -96,37 +122,10 @@
             on_press: 
                 root.manager.current = 'third'
                 root.manager.transition.direction = 'right'
-        RelativeLayout:
-            orientation: "horizontal"
-            pos: (root.width*.4, root.height*.36)
-            size_hint: .2,.1
-            # When clicked the popup opens
-            Button:
-                text: "Stats"
-                on_press: root.open_popup()
-    RelativeLayout:
-        Label:
-            text: "HP: 10"
-            pos: (root.width*(.4-.2), root.height*.44)
-            size_hint: .2,.1
-        Label:
-            text: "AC: 10"
-            pos: (root.width*.4, root.height*.44)
-            size_hint: .2,.1
-        Label:
-            text: "SP: 10"
-            pos: (root.width*(.4+0.2), root.height*.44)
-            size_hint: .2,.1
-        Label:
-            text: "Race: Human   /  Name: Merissa Jones   /   Level: 10   /   Class: Fighter"
-            pos: (root.width*.1, root.height*.5)
-            size_hint: .8,.05
-        Label:
-            text: "This is going to be a description of the fighter"
-            pos: (root.width*.1, root.height*.25)
-            size_hint: .8,.05
 
+#Equipped Weapons and Armor screen               
 <SecondScreen>:
+    #Images for the equipment background 
     RelativeLayout:
         pos: 0,0
         canvas.before:
@@ -134,6 +133,24 @@
                 source: 'Images/Backgrounds/Blacksmith Shop.png'
                 pos: self.x,self.y
                 size: self.width, self.height
+    #Character weapons and armor
+    RelativeLayout:
+        Spinner:
+            text: 'Weapons'
+            pos: (root.width*.25,root.height*.8)
+            size_hint: 0.5,.1
+            values: ["Weapons","Weapon 1", "Weapon 2", "Weapon 3"]
+            id: spinner_id1
+            on_text: root.spinner_clicked(spinner_id1.text)
+        Spinner:
+            text: 'Armor'
+            pos: (root.width*.25,root.height*.4)
+            size_hint: 0.5,.1
+            values: ["Armor", "Armor 1", "Armor 2", "Armor 3"]
+            id: spinner_id2
+            on_text: root.spinner_clicked(spinner_id2.text)
+    #Button to move back to the character screen from the equipment screen
+    RelativeLayout:
         Button:
             text: 'Character Stats'
             pos: (root.x, root.y)
@@ -141,22 +158,10 @@
             on_press: 
                 root.manager.current = 'main'
                 root.manager.transition.direction = 'right'
-        Spinner:
-            text: 'Weapons'
-            pos: (root.width*.25,root.height*.8)
-            size_hint: 0.5,.1
-            values: ["Weapon 1", "Weapon 2", "Weapon 3"]
-            id: spinner_id1
-            on_text: root.spinner_clicked(spinner_id1.text)
-        Spinner:
-            text: 'Armor'
-            pos: (root.width*.25,root.height*.4)
-            size_hint: 0.5,.1
-            values: ["Armor 1", "Armor 2", "Armor 3"]
-            id: spinner_id2
-            on_text: root.spinner_clicked(spinner_id2.text)
 
+#Character map screen
 <ThirdScreen>:
+    #Images for the map background
     RelativeLayout:
         pos: 0,0
         canvas.before:
@@ -164,6 +169,7 @@
                 source: 'Images/Backgrounds/Map Background.png'
                 pos: self.x,self.y
                 size: self.width, self.height
+    #Button to move back to te character screen from the map screen
         Button:
             text: 'Character Stats'
             pos: (root.width*0.8, root.y)
@@ -171,8 +177,11 @@
             on_press: 
                 root.manager.current = 'main'
                 root.manager.transition.direction = 'left'
+    #Fun thing for painting############################################################################################
+    RelativeLayout:
         Painter:
             pos: (root.width*0.8, root.height/2)
+    #Actions that can be taken by the character on the map
     GridLayout:
         orientation: "horizontal"
         rows:4
@@ -180,18 +189,18 @@
         size_hint: .5,.4
         Button:
             text: "Action"
-            on_press: root.open_popup()
+            on_press: root.open_action_popup()
         Button:
             text: "Bonus"
-            on_press: root.open_popup()
+            on_press: root.open_bonus_popup()
         Button:
             text: "Move"
-            on_press: root.open_popup()
+            on_press: root.open_move_popup()
         Button:
             text: "Inventory"
-            on_press: root.open_popup()
+            on_press: root.open_inventory_popup()
 
-<CustomPopup>:
+<StatsPopup>:
     title: "Stats"
     size_hint: .5, .5
     auto_dismiss: False
@@ -228,18 +237,120 @@
         cols: 3
         rows: 3
         pos: root.x, root.height
+        Button:
+            text: "Heabutt"
+        Button:
+            text: "Punch"
+        Button:
+            text: "Kick"
+        Button:
+            text: "Tackle"
+        Button:
+            text: "Slash"
+        Button:
+            text: "Stab"
         Label:
-            text: "STR: 10"
+            size_hint:.2,.2
+        Button:
+            size_hint:.2,.2
+            text: "Close"
+            on_press: root.dismiss()
         Label:
-            text: "DEX: 10"
+            size_hint:.2,.2
+
+<BonusPopup>:
+    title: "Bonus"
+    size_hint: .5, .5
+    auto_dismiss: False
+    GridLayout:
+        cols: 3
+        rows: 3
+        pos: root.x, root.height
+        Button:
+            text: "Flamethrower"
+        Button:
+            text: "InstaDeath"
+        Button:
+            text: "Space Laser"
+        Button:
+            text: "Gamma Ray"
+        Button:
+            text: "Stun"
+        Button:
+            text: "Katana"
         Label:
-            text: "CON: 10"
+            size_hint:.2,.2
+        Button:
+            size_hint:.2,.2
+            text: "Close"
+            on_press: root.dismiss()
         Label:
-            text: "INT: 10"
+            size_hint:.2,.2
+
+<MovePopup>:
+    title: "Move"
+    size_hint: .5, .5
+    auto_dismiss: False
+    GridLayout:
+        cols: 3
+        rows: 4
+        pos: root.x, root.height
+        Button:
+            text: "Left-Up"
+            on_press: root.dismiss()
+        Button:
+            text: "Upwards"
+            on_press: root.dismiss()
+        Button:
+            text: "Right-Up"
+            on_press: root.dismiss()
+        Button:
+            text: "Left"
+            on_press: root.dismiss()
+        Button:
+            text: "Stay"
+            on_press: root.dismiss()
+        Button:
+            text: "Right"
+            on_press: root.dismiss()
+        Button:
+            text: "Left-Down"
+            on_press: root.dismiss()
+        Button:
+            text: "Down"
+            on_press: root.dismiss()
+        Button:
+            text: "Right-Down"
+            on_press: root.dismiss()
         Label:
-            text: "WIS: 10"
+            size_hint:.2,.2
+        Button:
+            size_hint:.2,.2
+            text: "Close"
+            on_press: root.dismiss()
         Label:
-            text: "CHA: 10"
+            size_hint:.2,.2
+
+<InventoryPopup>:
+    title: "Bonus"
+    size_hint: .5, .5
+    auto_dismiss: False
+    GridLayout:
+        cols: 3
+        rows: 3
+        pos: root.x, root.height
+        Button:
+            text: "Bottle 1"
+        Button:
+            text: "Bottle 2"
+        Button:
+            text: "Bottle 3"
+        Button:
+            text: "Bottle 4"
+        Button:
+            text: "Bottle 4"
+        Button:
+            text: "Bottle 5"
         Label:
             size_hint:.2,.2
         Button:
