@@ -16,7 +16,8 @@ from kivy.properties import StringProperty
 from plyer import gps
 
 Builder.load_file('character.kv')
-Character_Name = "A"
+Character_Name = "No Name"
+Class_Name = ""
 
 
 class Painter(Widget):
@@ -54,16 +55,17 @@ class LoginScreen(Screen):
     def save_name(self):
         global Character_Name
         Character_Name = self.ids.full_name.text
-        print(Character_Name)
+    def save_class(self, value):
+        global Class_Name
+        Class_Name = self.ids.class_name.text
 
 class MainScreen(Screen):
-    char = "AAA"
-    def update(self):
-        global Character_Name
-        self.ids.label1.text = Character_Name
     #toggle drop down menu
-    def spinner_clicked(self, value):
-        print("Spinner Value " + value)
+    def store_description(self):
+        global Character_Name
+        global Class_Name
+        self.ids.description.text = Character_Name + " / " + Class_Name
+        self.ids.image.source = "Images/Characters/" + Class_Name + ".png"
         # Opens Popup when called
     def open_popup(self):
         the_popup = StatsPopup()
