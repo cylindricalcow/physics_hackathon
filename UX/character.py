@@ -16,6 +16,8 @@ from kivy.properties import StringProperty
 from plyer import gps
 
 Builder.load_file('character.kv')
+Character_Name = "A"
+
 
 class Painter(Widget):
     def on_touch_down(self, touch):
@@ -24,7 +26,7 @@ class Painter(Widget):
     def on_touch_move(self,touch):
         touch.ud["line"].points += [touch.x, touch.y]
 
-class CustomPopup(Popup):
+class StatsPopup(Popup):
     pass
 
 class ActionPopup(Popup):
@@ -40,25 +42,31 @@ class InventoryPopup(Popup):
     pass
 
 class Painter(Widget):
-    
     def on_touch_down(self, touch):
         with self.canvas:
             touch.ud["line"] = Line(points=(touch.x, touch.y))
-
     def on_touch_move(self,touch):
         touch.ud["line"].points += [touch.x, touch.y]
 
 class LoginScreen(Screen):
     def spinner_clicked(self, value):
         print("Spinner Value " + value)
+    def save_name(self):
+        global Character_Name
+        Character_Name = self.ids.full_name.text
+        print(Character_Name)
 
 class MainScreen(Screen):
+    char = "AAA"
+    def update(self):
+        global Character_Name
+        self.ids.label1.text = Character_Name
     #toggle drop down menu
     def spinner_clicked(self, value):
         print("Spinner Value " + value)
         # Opens Popup when called
     def open_popup(self):
-        the_popup = CustomPopup()
+        the_popup = StatsPopup()
         the_popup.open()
 
 class SecondScreen(Screen):
@@ -67,9 +75,18 @@ class SecondScreen(Screen):
         print("Spinner Value " + value)
 
 class ThirdScreen(Screen):
-    def open_popup(self):
-        the_popup = CustomPopup()
-        the_popup.open()    
+    def open_action_popup(self):
+        the_popup = ActionPopup()
+        the_popup.open()
+    def open_bonus_popup(self):
+        the_popup = BonusPopup()
+        the_popup.open()
+    def open_move_popup(self):
+        the_popup = MovePopup()
+        the_popup.open()
+    def open_inventory_popup(self):
+        the_popup = InventoryPopup()
+        the_popup.open() 
 
 sm = ScreenManager()
 sm.add_widget(LoginScreen(name='login'))
