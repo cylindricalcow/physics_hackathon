@@ -15,7 +15,7 @@ class Character:
             self.ac=10+self.stat_mods[1]#+ac of equipped armor
             self.XP = 0
             self.speed=30#-slow effect from armor #dummy values : will pull from database
-            self.level = self.lvl(self.XP)
+            self.level = self.xp2level(self.XP)
             self.prof = self.proficiency(self.level)
         # Dummy code, the dice command depends on a character's raceclass
             self.hp = game.dice(self.level,8) + self.stat_mods[2]
@@ -151,48 +151,15 @@ class Character:
             mods[i] = stat_mod
         return mods
 
-    def lvl(self, XP):
-        xp = self.XP
-        if (xp >= 0 and xp < 300):
-            return 1
-        elif (xp >= 300 and xp < 900):
-            return 2
-        elif (xp >= 900 and xp < 2700):
-            return 3
-        elif (xp >= 2700 and xp < 6500):
-            return 4
-        elif (xp >= 6500 and xp < 14000):
-            return 5
-        elif (xp >= 14000 and xp < 23000):
-            return 6
-        elif (xp >= 23000 and xp < 34000):
-            return 7
-        elif (xp >= 34000 and xp < 48000):
-            return 8
-        elif (xp >= 48000 and xp < 64000):
-            return 9
-        elif (xp >= 64000 and xp < 85000):
-            return 10
-        elif (xp >= 85000 and xp < 100000):
-            return 11
-        elif (xp >= 100000 and xp < 120000):
-            return 12
-        elif (xp >= 120000 and xp < 140000):
-            return 13
-        elif (xp >= 140000 and xp < 165000):
-            return 14
-        elif (xp >= 165000 and xp < 195000):
-            return 15
-        elif (xp >= 195000 and xp < 225000):
-            return 16
-        elif (xp >= 225000 and xp < 265000):
-            return 17
-        elif (xp >= 265000 and xp < 305000):
-            return 18
-        elif (xp >= 305000 and xp < 355000):
-            return 19
-        elif (xp >= 355000):
-            return 20
+    def xp2level(xp): #Takes in experience points, returns character level 
+        xplist=np.array([0,300,900,2700,6500,14000,23000,34000,48000,64000,85000,100000,120000,140000,165000,195000,225000,265000,305000,355000])
+        levellist=np.arange(1,21)   
+        if xp < 2700: 
+            level = np.log(3*xp/100)/np.log(3)
+        else:
+            a,b,c=np.polyfit(levellist,xplist, 2)
+            level = (-b+np.sqrt(np.power(b,2)-4*a*(c-xp)))/(2*a) #Fitting to quadratic above level 4. Not perfect, but functional
+        return np.floor(level) 
 
     def proficiency(self, level):
         lvl = self.level
