@@ -15,19 +15,19 @@
     #Set Title
         Label:
             text: "Welcome to your Dreamscape:"
-            pos: (root.width*.25, root.height*.35)
+            pos: (root.width*.25, root.height*.45)
             size_hint: .5,.8
         Label:
-            text: "Drogens and Dungoons"
-            pos: (root.width*.25, root.height*.25)
+            text: "Find HOT LOCAL SINGLES in your area"
+            pos: (root.width*.25, root.height*.35)
             size_hint: .5,.8
     #Build character
     GridLayout:
         orientation: "vertical"
-        rows: 2
+        rows: 5
         cols: 3
-        pos: (root.width*.15, root.height*.5)
-        size_hint: .6,.1
+        pos: (root.width*.2, root.height*.45)
+        size_hint: .6,.225
         Label:
             text: 'Name:'
         TextInput:
@@ -37,6 +37,7 @@
             text: "submit"
             on_press: 
                 root.save_name()
+        
         Label:
             text: 'Class and Race:'
         Spinner:
@@ -47,6 +48,131 @@
             on_text: root.save_class(class_name.text)
         Label:
 
+
+        Label:
+            text: 'Health Points:'
+        TextInput:
+            id: hp_name
+            size_hint: 1.6,.1
+        Button:
+            text: "submit"
+            on_press: 
+                root.save_attributes(0)
+
+        Label:
+            text: 'Armor Class:'
+        TextInput:
+            id: ac_name
+            size_hint: 1.6,.1
+        Button:
+            text: "submit"
+            on_press: 
+                root.save_attributes(1)
+
+        Label:
+            text: 'Speed:'
+        TextInput:
+            id: sp_name
+            size_hint: 1.6,.1  
+        Button:
+            text: "submit"
+            on_press: 
+                root.save_attributes(2)
+
+    GridLayout:
+        orientation: "vertical"
+        rows: 7
+        cols: 4
+        pos: (root.width*.2, root.height*.15)
+        size_hint: .6,.3
+        Label:
+        Label:
+            text: 'Points'
+            size_hint: 1.2,.1
+        Label:
+            text: 'Mod +/-'
+            size_hint: .4,.1
+        Label:
+
+        Label:
+            text: 'Strength:'
+        TextInput:
+            id: str_name
+            size_hint: 1.2,.1
+        TextInput:
+            id: str_mod_name
+            size_hint: .4,.1
+        Button:
+            text: "submit"
+            on_press: 
+                root.save_stats(0)
+
+
+        Label:
+            text: 'Dexterity:'
+        TextInput:
+            id: dex_name
+            size_hint: 1.2,.1  
+        TextInput:
+            id: dex_mod_name
+            size_hint: .4,.1   
+        Button:
+            text: "submit"
+            on_press: 
+                root.save_stats(1)
+        
+        Label:
+            text: 'Constitution:'
+        TextInput:
+            id: con_name
+            size_hint: 1.2,.1
+        TextInput:
+            id: con_mod_name
+            size_hint: .4,.1
+        Button:
+            text: "submit"
+            on_press: 
+                root.save_stats(2)
+        
+        Label:
+            text: 'Wisdom:'
+        TextInput:
+            id: wis_name
+            size_hint: 1.2,.1
+        TextInput:
+            id: wis_mod_name
+            size_hint: .4,.1
+        Button:
+            text: "submit"
+            on_press: 
+                root.save_stats(3)
+        
+        Label:
+            text: 'Intelligence:'
+        TextInput:
+            id: int_name
+            size_hint: 1.2,.1
+        TextInput:
+            id: int_mod_name
+            size_hint: .4,.1
+        Button:
+            text: "submit"
+            on_press: 
+                root.save_stats(4)
+        
+        Label:
+            text: 'Charisma:'
+        TextInput:
+            id: cha_name
+            size_hint: 1.2,.1
+        TextInput:
+            id: cha_mod_name
+            size_hint: .4,.1
+        Button:
+            text: "submit"
+            on_press: 
+                root.save_stats(5)
+
     #Buttons to change windows from Login
     RelativeLayout:
         Button:
@@ -56,6 +182,7 @@
             size_hint: .2,.1
             on_press:
                 root.manager.get_screen('main').store_description()
+                root.manager.get_screen('main').store_attributes()
                 root.manager.current = 'main'
                 root.manager.transition.direction = 'left'
 
@@ -70,7 +197,7 @@
                 pos: self.x,self.y
                 size: self.width, self.height
         Image:
-            id: image
+            id: character_image
             pos: (root.width*.4, root.height*.45)
             size_hint: .2, .6
     #Character infromation
@@ -80,21 +207,21 @@
             pos: (root.width*.1, root.height*.5)
             size_hint: .8,.05
         Label:
-            text: "This is going to be a description of the fighter"
+            text: "Information about character"
             pos: (root.width*.1, root.height*.25)
             size_hint: .8,.05
     #Important Character attributes
     RelativeLayout:
         Label:
-            text: "HP: 10"
+            id: attributes0
             pos: (root.width*(.4-.2), root.height*.44)
             size_hint: .2,.1
         Label:
-            text: "AC: 10"
+            id: attributes1
             pos: (root.width*.4, root.height*.44)
             size_hint: .2,.1
         Label:
-            text: "SP: 10"
+            id: attributes2
             pos: (root.width*(.4+0.2), root.height*.44)
             size_hint: .2,.1
     #Buttons to check the character stats
@@ -105,7 +232,8 @@
         # When clicked the popup opens
         Button:
             text: 'Stats'
-            on_press: root.open_popup()
+            on_press: 
+                root.open_popup()
     #Buttons to change windows from the character page
     RelativeLayout:
         Button:
@@ -140,15 +268,11 @@
             pos: (root.width*.25,root.height*.8)
             size_hint: 0.5,.1
             values: ["Weapons","Weapon 1", "Weapon 2", "Weapon 3"]
-            id: spinner_id1
-            on_text: root.spinner_clicked(spinner_id1.text)
         Spinner:
             text: 'Armor'
             pos: (root.width*.25,root.height*.4)
             size_hint: 0.5,.1
             values: ["Armor", "Armor 1", "Armor 2", "Armor 3"]
-            id: spinner_id2
-            on_text: root.spinner_clicked(spinner_id2.text)
     #Button to move back to the character screen from the equipment screen
     RelativeLayout:
         Button:
@@ -189,16 +313,16 @@
         size_hint: .5,.4
         Button:
             text: "Action"
-            on_press: root.open_action_popup()
+            on_press: root.open_popup(0)
         Button:
             text: "Bonus"
-            on_press: root.open_bonus_popup()
+            on_press: root.open_popup(1)
         Button:
             text: "Move"
-            on_press: root.open_move_popup()
+            on_press: root.open_popup(2)
         Button:
             text: "Inventory"
-            on_press: root.open_inventory_popup()
+            on_press: root.open_popup(3)
 
 <StatsPopup>:
     title: "Stats"
@@ -209,17 +333,17 @@
         rows: 3
         pos: root.x, root.height
         Label:
-            text: "STR: 10"
+            id: stats0
         Label:
-            text: "DEX: 10"
+            id: stats1
         Label:
-            text: "CON: 10"
+            id: stats2
         Label:
-            text: "INT: 10"
+            id: stats3
         Label:
-            text: "WIS: 10"
+            id: stats4
         Label:
-            text: "CHA: 10"
+            id: stats5
         Label:
             size_hint:.2,.2
         Button:
@@ -239,16 +363,22 @@
         pos: root.x, root.height
         Button:
             text: "Heabutt"
+            on_press: root.dismiss()
         Button:
             text: "Punch"
+            on_press: root.dismiss()
         Button:
             text: "Kick"
+            on_press: root.dismiss()
         Button:
             text: "Tackle"
+            on_press: root.dismiss()
         Button:
             text: "Slash"
+            on_press: root.dismiss()
         Button:
             text: "Stab"
+            on_press: root.dismiss()
         Label:
             size_hint:.2,.2
         Button:
@@ -268,16 +398,22 @@
         pos: root.x, root.height
         Button:
             text: "Flamethrower"
+            on_press: root.dismiss()
         Button:
             text: "InstaDeath"
+            on_press: root.dismiss()
         Button:
             text: "Space Laser"
+            on_press: root.dismiss()
         Button:
             text: "Gamma Ray"
+            on_press: root.dismiss()
         Button:
             text: "Stun"
+            on_press: root.dismiss()
         Button:
             text: "Katana"
+            on_press: root.dismiss()
         Label:
             size_hint:.2,.2
         Button:
@@ -341,16 +477,22 @@
         pos: root.x, root.height
         Button:
             text: "Bottle 1"
+            on_press: root.dismiss()
         Button:
             text: "Bottle 2"
+            on_press: root.dismiss()
         Button:
             text: "Bottle 3"
+            on_press: root.dismiss()
         Button:
             text: "Bottle 4"
+            on_press: root.dismiss()
         Button:
             text: "Bottle 4"
+            on_press: root.dismiss()
         Button:
             text: "Bottle 5"
+            on_press: root.dismiss()
         Label:
             size_hint:.2,.2
         Button:
