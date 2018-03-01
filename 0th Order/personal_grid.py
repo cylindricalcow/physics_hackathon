@@ -106,10 +106,31 @@ class Grid(DM):
         plt.savefig('test_arrow.png')
         plt.show()
 #DM=np.array([np.array([x,y]),health, name])
-print(np.array([np.array([2,2]),420,'Dragon McDragonface']))
 Iain=DM(np.array([[np.array([11,7]),69,'Alice'],[np.array([2,4]),69,'Bob'],[np.array([-3,-2]),69,'Rob'],[np.array([1,5]),69,'Bobert']]),np.array([np.array([np.array([2,2]),420,'Dragon McDragonface'])]))       
 test=Grid('Bobert',10,Iain)
 test.plot_map()
 
 #Class for updating postions of allies with respect to the person. Positions of people should all be stored with the DM
-
+#For single player, use Shane's npcs
+#Could collect stats for each instance and update the stats class later
+class Stats:
+    def __init__(self,allies,enemies, damage_taken, damage_dealt, damaged_healed,exp, spells_cast,attacks_done,kills,turns,healed,distance_moved,gold, items,statuses,std,alignment, bamf,quest_points, **kwargs):
+        self.allies=0
+        self.enemies=0
+        self.damage_taken=0
+        self.damage_healed=0
+        self.exp=0
+        self.spells_cast=0
+        self.attacks_done=0
+        self.kills=0
+        self.turns=0
+        self.healed=0
+        self.distance_moved=0
+        self.gold=0
+        self.items=0
+        self.statuses=[] #status effects throughout the encounter
+        self.std=0 #you know
+        self.alignment=alignment  #0 is neutral, negative is evil, positive is good
+        self.bamf=0
+        self.quest_points=0
+        
