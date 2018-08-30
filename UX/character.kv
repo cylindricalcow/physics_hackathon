@@ -200,7 +200,7 @@
             id: character_image
             pos: (root.width*.4, root.height*.45)
             size_hint: .2, .6
-    #Character infromation
+    #Character information
     RelativeLayout:
         Label:
             id: description
@@ -287,13 +287,14 @@
 <ThirdScreen>:
     #Images for the map background
     RelativeLayout:
-        pos: 0,0
         canvas.before:
             BorderImage:
-                source: 'Images/Backgrounds/Map Background.png'
+                source: root.map()
                 pos: self.x,self.y
                 size: self.width, self.height
-    #Button to move back to te character screen from the map screen
+    RelativeLayout:
+        pos: 0,0
+    #Button to move back to the character screen from the map screen
         Button:
             text: 'Character Stats'
             pos: (root.width*0.8, root.y)
@@ -301,16 +302,12 @@
             on_press: 
                 root.manager.current = 'main'
                 root.manager.transition.direction = 'left'
-    #Fun thing for painting############################################################################################
-    RelativeLayout:
-        Painter:
-            pos: (root.width*0.8, root.height/2)
     #Actions that can be taken by the character on the map
     GridLayout:
         orientation: "horizontal"
         rows:4
         cols:1
-        size_hint: .5,.4
+        size_hint: .3,.2
         Button:
             text: "Action"
             on_press: root.open_popup(0)
@@ -326,7 +323,7 @@
 
 <StatsPopup>:
     title: "Stats"
-    size_hint: .5, .5
+    size_hint: .25, .5
     auto_dismiss: False
     GridLayout:
         cols: 3

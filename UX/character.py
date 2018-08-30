@@ -16,6 +16,9 @@ from kivy.properties import StringProperty
 from plyer import gps
 import random
 import numpy as np
+import folium
+from cefbrowser import CEFBrowser
+import base64
 
 Character_Name = "Mr. Smiley"
 Class_Name = "Circular Ellipse"
@@ -24,13 +27,6 @@ Modifiers = np.zeros(6, int)
 Random_Attributes = np.zeros(3,int)
 Builder.load_file('character.kv')
 
-
-class Painter(Widget):
-    def on_touch_down(self, touch):
-        with self.canvas:
-            touch.ud["line"] = Line(points=(touch.x, touch.y))
-    def on_touch_move(self,touch):
-        touch.ud["line"].points += [touch.x, touch.y]
 
 class StatsPopup(Popup):
     def store_stats_and_mods(self):
@@ -49,7 +45,16 @@ class MovePopup(Popup):
 
 class InventoryPopup(Popup):
     pass
-
+'''
+class Map(Widget):
+      uiuc_coords = [40.1100, -88.2272]
+      my_map = folium.Map(location = uiuc_coords, zoom_start = 18)
+      html = my_map.get_root().render()
+      html = html.encode("utf-8", "replace")
+      b64 = base64.b64encode(html).decode("utf-8", "replace")
+      url = "data:text/html;base64,{data}".format(data=b64)
+      return CEFBrowser.CEFBrowser(url=url)
+'''
 class Painter(Widget):
     def on_touch_down(self, touch):
         with self.canvas:
@@ -112,6 +117,15 @@ class SecondScreen(Screen):
     pass
 
 class ThirdScreen(Screen):
+    def map(self):
+        uiuc_coords = [40.1100, -88.2272]
+        my_map = folium.Map(location = uiuc_coords, zoom_start = 18)
+        my_map.add_child(folium.ClickForMarker())
+        html = my_map.get_root().render()
+        html = html.encode("utf-8", "replace")
+        b64 = base64.b64encode(html).decode("utf-8", "replace")
+        url = "data:text/html;base64,{data}".format(data=b64)
+        self.add_widget(CEFBrowser(url=url))
     def open_popup(self, index):
         the_popup = {0: ActionPopup(), 1: BonusPopup(), 2:MovePopup(), 3: InventoryPopup()}[index]
         the_popup.open()
